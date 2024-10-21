@@ -21,9 +21,9 @@
     </header>
     <main>
         <section class="filter">
-            <input type="text">
+            <input type="text" id="search" onkeydown="nameUrl(this.value)" placeholder="Search for a country...">
             <select name="filterRegion" id="filterRegion"> 
-                <option value="">Filter by Region</option>
+                <option value="all" onclick="regionUrl(this.value)">Filter by Region</option>
                 <option value="Africa" onclick="regionUrl(this.value)">Africa</option>
                 <option value="America" onclick="regionUrl(this.value)">America</option>
                 <option value="Asia" onclick="regionUrl(this.value)">Asia</option>

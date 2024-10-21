@@ -1,26 +1,43 @@
 let url = "https://restcountries.com/v3.1/all";
 let cardList = document.getElementById('cardList')
 let region
+let data
+let name
 
 
 
 let regionUrl = (region) => {
     let select = document.getElementById('filterRegion').value
     
-    if (select == "") {
+    if (select == "all") {
         url = "https://restcountries.com/v3.1/all"
     }else{
         url = "https://restcountries.com/v3.1/region/" + region.toLowerCase()
     }
+
+    document.getElementById('search').value = ""
+
+    getData(url)
+}
+
+let nameUrl = (name) => {
+    let search = document.getElementById('search').value
+    
+    if (search == "") {
+        url = "https://restcountries.com/v3.1/all"
+    }else{
+        url = "https://restcountries.com/v3.1/name/" + name.toLowerCase()
+    }    
 
     getData(url)
 }
 
 
 async function getData(url) {
-    const response = await fetch(url)
-    const data = await response.json()
-
+    
+    response = await fetch(url)
+    data = await response.json()
+    cardList.innerHTML = ""
     data.forEach(element => {
         let card = document.createElement('div')
         let flag = document.createElement('img')
@@ -29,6 +46,10 @@ async function getData(url) {
         let pops = document.createElement("li")
         let region = document.createElement("li")
         let capital = document.createElement("li")
+
+        pops.textContent = "Population : "
+        region.textContent = "Region : "
+        capital.textContent = "Capital : "
 
         pops.append(element.population)
         region.append(element.region)
@@ -53,4 +74,4 @@ async function getData(url) {
     });
 }
 
-getData(url)
+getData(url)    
