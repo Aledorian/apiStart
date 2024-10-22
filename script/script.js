@@ -4,7 +4,11 @@ let region
 let data
 let name
 
+const body = document.getElementsByTagName('body');
 
+let changeMode = () =>{
+    body[0].classList.toggle('dark')
+}
 
 let regionUrl = (region) => {
     let select = document.getElementById('filterRegion').value
