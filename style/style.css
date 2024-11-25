@@ -64,7 +64,7 @@ svg{
 
 .card{
     width: calc((100% / 4) - 80px);
-    height: 400px;
+    height: 450px;
     background-color: var(--card-color);
     margin-top: 80px;
     box-shadow: 1px 1px 5px var(--shadow);
@@ -121,4 +121,8 @@ h3{
 
 div>span{
     margin-right: 10px;
+}
+
+.card:hover{
+    transform: scale(1.3);
 }

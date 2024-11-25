@@ -4,14 +4,16 @@ let region
 let data
 let name
 
-const body = document.getElementsByTagName('body');
+const body = document.querySelector('body');
+let select = document.getElementById('filterRegion').value
+
 
 let changeMode = () =>{
-    body[0].classList.toggle('dark')
+    body.classList.toggle('dark')
 }
 
 let regionUrl = (region) => {
-    let select = document.getElementById('filterRegion').value
+    select = document.getElementById('filterRegion').value
     
     if (select == "all") {
         url = "https://restcountries.com/v3.1/all"
@@ -26,10 +28,11 @@ let regionUrl = (region) => {
 
 let nameUrl = (name) => {
     let search = document.getElementById('search').value
-    
+
     if (search == "") {
         url = "https://restcountries.com/v3.1/all"
-    }else{
+    }
+    else{
         url = "https://restcountries.com/v3.1/name/" + name.toLowerCase()
     }    
 
@@ -39,10 +42,13 @@ let nameUrl = (name) => {
 
 async function getData(url) {
     
-    response = await fetch(url)
-    data = await response.json()
+    let response = await fetch(url)
+    let data = await response.json()    
+
     cardList.innerHTML = ""
+
     data.forEach(element => {
+        
         let card = document.createElement('div')
         let flag = document.createElement('img')
         let countryName = document.createElement('h3')
@@ -55,7 +61,7 @@ async function getData(url) {
         region.textContent = "Region : "
         capital.textContent = "Capital : "
 
-        pops.append(element.population)
+        pops.append(new Intl.NumberFormat().format(element.population )+ " " + element.demonyms.eng.f )
         region.append(element.region)
         capital.append(element.capital)
 
@@ -70,7 +76,7 @@ async function getData(url) {
         cardList.append(card)
 
         card.append(flag)
-
+        
         card.append(countryName)
 
         card.append(counrtyInfo)
